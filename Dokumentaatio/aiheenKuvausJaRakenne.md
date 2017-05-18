@@ -2,4 +2,5 @@
 
 **Käyttäjät:** Pelaaja.
 
-**Toiminnot:** Liikkuminen ruudukossa lähinnä oleviin ruutuihin. Jos ruudussa, johon liikuttiin on esimerkiksi vihollinen tulee esiin valikko josta pelaaja valitsee mitä tehdään.
+**Toiminnot:** Liikkuminen ruudukossa lähinnä oleviin ruutuihin 
+* Jos ruudussa, johon liikuttiin on esimerkiksi vihollinen tulee esiin valikko josta pelaaja valitsee mitä tehdään.
