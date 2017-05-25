@@ -6,4 +6,4 @@ Yksinkertainen vuoropohjainen luolastoroolipeli.
 ## Dokumentaatio
 [aiheen kuvaus](Dokumentaatio/aiheenKuvausJaRakenne.md)
 
-[tuntikirjanpito](Dokumentaatio/tuntukirjanpito.md)
+[tuntikirjanpito](Dokumentaatio/tuntikirjanpito.md)
