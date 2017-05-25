@@ -28,20 +28,20 @@ public class Logic {
 
     public void runGame() {
 
-        boolean GameOver = false;
+        boolean gameOver = false;
         Enemy enmy = enmies().get(0);
         ui.alert(6, enmy.getName());
-        while (!GameOver) {
+        while (!gameOver) {
 
             int plrPoints = plr.getTurnpoints();
-            while (plrPoints > 0 && !GameOver) {
-                GameOver = plrTurn(ui.battle(enmy.getName()), enmy);
+            while (plrPoints > 0 && !gameOver) {
+                gameOver = plrTurn(ui.battle(enmy.getName()), enmy);
                 plrPoints--;
             }
-            if (!GameOver) {
+            if (!gameOver) {
 
                 plr.unParry();
-                GameOver = enmyTurn(enmy.getTurnpoints(), enmy);
+                gameOver = enmyTurn(enmy.getTurnpoints(), enmy);
                 enmy.unParry();
             }
 
@@ -83,14 +83,14 @@ public class Logic {
     }
 
     public boolean enmyTurn(int n, Enemy enmy) {
-        boolean GameOver = false;
+        boolean gameOver = false;
         while (n > 0) {
 
             if (rndm.nextInt(10) <= 6) {
                 if (enmy.getAttProb() >= rndm.nextInt(100) + 1) {
                     if (plr.takeDmg(enmy.getAttack()) == 0) {
                         ui.alert(8, enmy.getName());
-                        GameOver = true;
+                        gameOver = true;
                         break;
                     }
                 }
@@ -99,7 +99,7 @@ public class Logic {
             }
             n--;
         }
-        return GameOver;
+        return gameOver;
     }
 
     public boolean moveLegal(int udlr, int posX, int posY) {

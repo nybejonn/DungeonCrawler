@@ -13,13 +13,16 @@ public class Enemy extends Entity {
         this.defProb = defProb;
         this.attProb = attackProb;
     }
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
-    public int getDefProb(){
+
+    public int getDefProb() {
         return this.defProb;
     }
-    public int getAttProb(){
+
+    public int getAttProb() {
         return this.attProb;
     }
 }

@@ -44,16 +44,17 @@ public abstract class Entity {
         return this.parried;
     }
 
-    public double takeDmg(double dmg){
+    public double takeDmg(double dmg) {
         this.health = Math.max(this.health - dmg, 0);
         return this.health;
     }
-    
+
     public void parry() {
         this.parried = true;
         this.turnpoints--;
     }
-    public void unParry(){
+
+    public void unParry() {
         this.parried = false;
         this.turnpoints = this.turnpointsSafe;
     }

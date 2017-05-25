@@ -6,10 +6,9 @@ public class Interface {
 
     private Scanner input;
 
-
     public Interface() {
         this.input = new Scanner(System.in);
-       
+
     }
 
     public void strt() {
@@ -30,7 +29,7 @@ public class Interface {
     }
 
     public String battle(String enmyName) {
-        
+
         String in = "";
         while (!in.equals("1") && !in.equals("2") && !in.equals("3")) {
             System.out.println("\n1 Attack\n2 Defend\n3 Quit game");
@@ -38,8 +37,8 @@ public class Interface {
         }
         return in;
     }
-    
-    public void alert(int k,String name){
+
+    public void alert(int k, String name) {
         //1 = wrong direction,2 = attack unsuccesful,3 = defence unsuccesful,
         //4 = defeat enemy, 5 = attack succsesfull, 6 = confrontation,7 = defence succesful,
         //8 = game over
@@ -52,19 +51,19 @@ public class Interface {
         if (k == 3) {
             System.out.println("Your defence has no effect");
         }
-        if(k==4){
+        if (k == 4) {
             System.out.println(name + " has been vanguished!");
         }
-        if(k==5){
+        if (k == 5) {
             System.out.println(name + " takes damage!");
         }
-        if(k==6){
+        if (k == 6) {
             System.out.println("You are confronted by an " + name + ".");
         }
-        if(k==7){
+        if (k == 7) {
             System.out.println("You parry the enemy succesfully!");
         }
-        if(k==8){
+        if (k == 8) {
             System.out.println(name + " strikes you down.\n GAME OVER");
         }
     }
