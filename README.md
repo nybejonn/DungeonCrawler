@@ -7,3 +7,5 @@ Yksinkertainen vuoropohjainen luolastoroolipeli.
 [aiheen kuvaus](Dokumentaatio/aiheenKuvausJaRakenne.md)
 
 [tuntikirjanpito](Dokumentaatio/tuntikirjanpito.md)
+
+![Luokkakaavio](Dokumentaatio/Luokkakaavio.jpg)
