@@ -1,7 +1,7 @@
-## DungeonCrawler
+# DungeonCrawler
 
-# Lyhyt kuvaus:
+### Lyhyt kuvaus:
 Yksinkertainen vuoropohjainen luolastoroolipeli.
 
-# Dokumentaatio
+## Dokumentaatio
 [aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
