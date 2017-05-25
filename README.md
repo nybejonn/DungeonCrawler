@@ -4,4 +4,4 @@
 Yksinkertainen vuoropohjainen luolastoroolipeli.
 
 ## Dokumentaatio
-[aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
+[aiheen kuvaus](Dokumentaatio/aiheenKuvausJaRakenne.md)
