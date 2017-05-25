@@ -1,5 +1,7 @@
 ### Tuntikirjanpito
-P‰iv‰ | Tunnit | Kuvaus
+P√§iv√§ | Tunnit | Kuvaus
 --------------- | ----- | ------
-17.05.2016 | 3h | Aiheen suunnittelua, repon luonti, dokumentaation tekemist‰
-... | ... | ...
+17.05.2017 | 3h | Aiheen suunnittelua, repon luonti, dokumentaation tekemist√§
+22.05.2017 | 4h | Ohjelmointia ja suunnittelua
+23.05.2017 | 2h | Ohjelmointia
+25.05.2017 | 3h | Ohjelmointia, dokumentaatiota
