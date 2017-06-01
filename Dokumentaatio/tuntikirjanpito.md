@@ -5,3 +5,5 @@ Päivä | Tunnit | Kuvaus
 22.05.2017 | 4h | Ohjelmointia ja suunnittelua
 23.05.2017 | 2h | Ohjelmointia
 25.05.2017 | 3h | Ohjelmointia, dokumentaatiota
+30.05.2017 | 3h | Ohjelmointia
+01.05.2017 | 8h | Ohjelmointia, dokumentaatiota
