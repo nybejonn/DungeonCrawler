@@ -9,3 +9,8 @@ Yksinkertainen vuoropohjainen luolastoroolipeli.
 [tuntikirjanpito](Dokumentaatio/tuntikirjanpito.md)
 
 ![Luokkakaavio](Dokumentaatio/Luokkakaavio.jpg)
+
+[checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/nybejonn/DungeonCrawler/blob/master/Dokumentaatio/checkstyle/checkstyle.html)
+
+[pit-raportti](https://htmlpreview.github.io/?https://github.com/nybejonn/DungeonCrawler/blob/master/Dokumentaatio/pit/201706011854/index.html)
+
