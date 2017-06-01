@@ -11,28 +11,39 @@ public class Interface {
 
     }
 
-    public void strt() {
-        System.out.println("You have entered the Dungeon. Darkness surrounds you.");
-
+    public boolean strt() {
+        System.out.println("1. Start game");
+        System.out.println("2. Exit");
+        String in = this.input.nextLine();
+        while (!in.equals("1") && !in.equals("2")) {
+            in = this.input.nextLine();
+        }
+        if (in.equals("1")) {
+            System.out.println("Darkness surrounds you.");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int whereTo() {
-        String in = "";
-        while (!in.equals("1") && !in.equals("2") && !in.equals("3") && !in.equals("4")) {
-            System.out.println("1. Move up");
-            System.out.println("2. Move down");
-            System.out.println("3. Move left");
-            System.out.println("4. Move right.");
+        System.out.println("1. Move up");
+        System.out.println("2. Move down");
+        System.out.println("3. Move left");
+        System.out.println("4. Move right.");
+        System.out.println("5. Quit game.");
+        String in = this.input.nextLine();
+        while (!in.equals("1") && !in.equals("2") && !in.equals("3") && !in.equals("4") && !in.equals("5")) {
+            System.out.println("You can't do that right now.");
             in = this.input.nextLine();
         }
         return Integer.parseInt(in);
     }
 
-    public String battle(String enmyName) {
-
+    public String battle() {
         String in = "";
-        while (!in.equals("1") && !in.equals("2") && !in.equals("3")) {
-            System.out.println("\n1 Attack\n2 Defend\n3 Quit game");
+        while (!in.equals("1") && !in.equals("2")) {
+            System.out.println("\n1 Attack\n2 Defend");
             in = this.input.nextLine();
         }
         return in;
@@ -41,7 +52,8 @@ public class Interface {
     public void alert(int k, String name) {
         //1 = wrong direction,2 = attack unsuccesful,3 = defence unsuccesful,
         //4 = defeat enemy, 5 = attack succsesfull, 6 = confrontation,7 = defence succesful,
-        //8 = game over
+        //8 = game over, 9 = enemy attack success, 10 = enemy def success, 11 = enemy attacks
+        //12 = enemy attack fails, 13 = enemy defends
         if (k == 1) {
             System.out.println("Can't go that way.");
         }
@@ -58,13 +70,28 @@ public class Interface {
             System.out.println(name + " takes damage!");
         }
         if (k == 6) {
-            System.out.println("You are confronted by an " + name + ".");
+            System.out.println("You are confronted by " + name + ".");
         }
         if (k == 7) {
             System.out.println("You parry the enemy succesfully!");
         }
         if (k == 8) {
-            System.out.println(name + " strikes you down.\n GAME OVER");
+            System.out.println("You are too weak. The enemy strikes you down.\nGAME OVER");
+        }
+        if (k == 9) {
+            System.out.println(name + " does damage, but you are still able to fight.");
+        }
+        if (k == 10) {
+            System.out.println("You falter and lose one turnpoint.");
+        }
+        if (k == 11) {
+            System.out.println(name + " attacks.");
+        }
+        if (k == 12) {
+            System.out.println("It has no effect.");
+        }
+        if (k == 13) {
+            System.out.println(name + " tries to parry you.");
         }
     }
 }

@@ -5,9 +5,7 @@
  */
 package dungeonrpg.dungeonrpg.logic;
 
-import dungeonrpg.dungeonrpg.entities.Player;
 import dungeonrpg.dungeonrpg.entities.Enemy;
-import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -25,6 +23,7 @@ public class LogicTest {
     Enemy e;
     Enemy e2;
     Enemy e3;
+    Enemy e4;
 
     public LogicTest() {
     }
@@ -39,11 +38,14 @@ public class LogicTest {
 
     @Before
     public void setUp() {
+        //Enemy constructor (String name, int attackProb, int defProb, int posX, 
+        //int posY, double health, double attack, int turnpoints)
         l = new Logic();
         e = new Enemy("", 1, 0, 2, 2, 0, 2.0, 2);
         e2 = new Enemy("", 0, 101, 2, 2, 100, 0, 2);
-        e3 = new Enemy("",101,0,2,2,100,2.0,2);
-        
+        e3 = new Enemy("", 101, 0, 2, 2, 100, 2.0, 2);
+        e4 = new Enemy("", 0, 0, 2, 2, 100, 2.0, 2);
+
     }
 
     @After
@@ -51,34 +53,17 @@ public class LogicTest {
     }
 
     @Test
-    public void moveLegalityTest1() {
-        assertEquals("Can't move out of world", false, l.moveLegal(1, Math.floorDiv(l.getWrldSize(), 2), l.getWrldSize()));
-        assertEquals("Can't move out of world", false, l.moveLegal(2, Math.floorDiv(l.getWrldSize(), 2), 1));
-        assertEquals("Can't move out of world", false, l.moveLegal(3, 1, Math.floorDiv(l.getWrldSize(), 2)));
-        assertEquals("Can't move out of world", false, l.moveLegal(4, l.getWrldSize(), Math.floorDiv(l.getWrldSize(), 2)));
-        
+    public void plrAttTest() {
+        assertEquals("Enemy health = 0 returns true", true, l.plrAtt(e));
+        assertEquals("Enemy health >0 returns false", false, l.plrAtt(e2));
     }
+
     @Test
-    public void moveLegalityTest2(){
-        assertEquals("Can move inside world", true, l.moveLegal(1, Math.floorDiv(l.getWrldSize(), 2), Math.floorDiv(l.getWrldSize(), 2)));
-        assertEquals("Can move inside world", true, l.moveLegal(2, Math.floorDiv(l.getWrldSize(), 2), Math.floorDiv(l.getWrldSize(), 2)));
-        assertEquals("Can move inside world", true, l.moveLegal(3, Math.floorDiv(l.getWrldSize(), 2), Math.floorDiv(l.getWrldSize(), 2)));
-        assertEquals("Can move inside world", true, l.moveLegal(4, Math.floorDiv(l.getWrldSize(), 2), Math.floorDiv(l.getWrldSize(), 2)));
-    }
-    @Test
-    public void moveLegalityTest3(){
-        assertEquals("Can only move up,down,left or right",false,l.moveLegal(5,Math.floorDiv(l.getWrldSize(), 2), Math.floorDiv(l.getWrldSize(), 2)));
-        assertEquals("Can only move up,down,left or right",false,l.moveLegal(-1,Math.floorDiv(l.getWrldSize(), 2), Math.floorDiv(l.getWrldSize(), 2)));
-    }
-    @Test
-    public void plrTurnTest(){
-        assertEquals("Quitting returns true", true,l.plrTurn("3", e));
-        assertEquals("Enemy health = 0 returns true", true,l.plrTurn("1", e));
-        assertEquals("Enemy health >0 returns false",false,l.plrTurn("1", e2));
-    }
-    @Test
-    public void enmyTurnAlwaysEndsTest(){
-        assertEquals("",false,l.enmyTurn(100, e2));
-        assertEquals("",true,l.enmyTurn(100, e3));
+    public void plrTurnTest() {
+        //4 = enemy dies, 5 = enemy takes dmg, 2 = attack fail, 7 = enemy is parried, 3 = defence fail
+        assertEquals("Enemy dies --> return 4", 4, l.plrTurn(e, "1"));
+        assertEquals("Enemy takes dmg but doesn't die ret 5", 5, l.plrTurn(e4, "1"));
+        assertEquals("Enemy gets parried returns 7", 7, l.plrTurn(e4, "2"));
+        assertEquals("Enemy resists parry returns 3", 3, l.plrTurn(e3, "2"));
     }
 }

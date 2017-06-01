@@ -1,12 +1,11 @@
 package dungeonrpg.dungeonrpg;
 
-import dungeonrpg.dungeonrpg.logic.Logic;
-import dungeonrpg.dungeonrpg.ui.Interface;
-import java.util.ArrayList;
+import dungeonrpg.dungeonrpg.logic.Runner;
 
 public class DungeonCrawler {
 
     public static void main(String[] args) {
-        new Logic().runGame();
+        Runner r = new Runner();
+        r.runGame();
     }
 }

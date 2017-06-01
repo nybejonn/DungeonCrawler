@@ -2,142 +2,86 @@ package dungeonrpg.dungeonrpg.logic;
 
 import dungeonrpg.dungeonrpg.entities.Player;
 import dungeonrpg.dungeonrpg.entities.Enemy;
-import dungeonrpg.dungeonrpg.ui.Interface;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Logic {
 
-    private final Integer wrldSize;
+    private GameWorld wrld;
     private Player plr;
     private Random rndm;
-    private Interface ui;
 
     public Logic() {
-
+        this.wrld = new GameWorld(5);
         this.plr = new Player();
-        this.wrldSize = 5;
         this.rndm = new Random();
-        this.ui = new Interface();
     }
 
-    public int getWrldSize() {
-        return wrldSize;
+    public GameWorld getWrld() {
+        return this.wrld;
     }
 
-    public void runGame() {
-
-        boolean gameOver = false;
-        Enemy enmy = enmies().get(0);
-        ui.alert(6, enmy.getName());
-        while (!gameOver) {
-
-            int plrPoints = plr.getTurnpoints();
-            while (plrPoints > 0 && !gameOver) {
-                gameOver = plrTurn(ui.battle(enmy.getName()), enmy);
-                plrPoints--;
-            }
-            if (!gameOver) {
-
-                plr.unParry();
-                gameOver = enmyTurn(enmy.getTurnpoints(), enmy);
-                enmy.unParry();
-            }
-
-        }
+    public Player getPlr() {
+        return this.plr;
     }
 
     public boolean movement(int d) {
-        if (moveLegal(d, plr.getPosX(), plr.getPosY())) {
+
+        if (wrld.moveLegal(d, plr.getPosX(), plr.getPosY())) {
             plr.move(d);
             return true;
         }
         return false;
     }
 
-    public boolean plrTurn(String actn, Enemy enmy) {
-        int x = rndm.nextInt(100) + 1;
-        if (actn.equals("3")) {
+    public int plrTurn(Enemy enmy, String actn) {
+        //4 = enemy dies, 5 = enemy takes dmg, 2 = attack fail, 7 = enemy is parried, 3 = defence fail
+        if (actn.equals("1")) {
+            if (plrAtt(enmy)) {
+                if (enmy.getHealth() == 0) {
+                    wrld.killEnmy(enmy.getPosX(), enmy.getPosY());
+                    return 4;
+                } else {
+                    return 5;
+                }
+            }
+            return 2;
+        }
+        if (plrDef(enmy)) {
+            return 7;
+        }
+        return 3;
+    }
+
+    public boolean plrAtt(Enemy enmy) {
+        if (enmy.getDefProb() <= rndm.nextInt(100) + 1) {
+            enmy.takeDmg(plr.getAttack());
             return true;
         }
-        if (actn.equals("1")) {
-            if (enmy.getDefProb() <= x) {
-                if (enmy.takeDmg(plr.getAttack()) == 0) {
-                    ui.alert(4, enmy.getName());
-                    return true;
-                } else {
-                    ui.alert(5, enmy.getName());
-                }
-            } else {
-                ui.alert(2, null);
-            }
-        }
-        if (actn.equals("2") && enmy.getAttProb() <= x) {
-            ui.alert(7, null);
+        return false;
+    }
+
+    public boolean plrDef(Enemy enmy) {
+        if (enmy.getAttProb() <= rndm.nextInt(100) + 1) {
             enmy.parry();
-        } else if (actn.equals("2")) {
-            ui.alert(3, null);
+            return true;
         }
         return false;
     }
 
-    public boolean enmyTurn(int n, Enemy enmy) {
-        boolean gameOver = false;
-        while (n > 0) {
-
-            if (rndm.nextInt(10) <= 6) {
-                if (enmy.getAttProb() >= rndm.nextInt(100) + 1) {
-                    if (plr.takeDmg(enmy.getAttack()) == 0) {
-                        ui.alert(8, enmy.getName());
-                        gameOver = true;
-                        break;
-                    }
-                }
+    public int enmyActn(Enemy enmy) {
+        //1=enemy attacks succesfully, 2 = enemy attack fails, 3 = enemy parries you, 4 = enemy def fail
+        if (rndm.nextInt(10) <= 6) {
+            if (enmy.getAttProb() >= rndm.nextInt(100) + 1) {
+                plr.takeDmg(enmy.getAttack());
+                return 1;
             } else {
-                //vihulainen puolustaa
-            }
-            n--;
-        }
-        return gameOver;
-    }
-
-    public boolean moveLegal(int udlr, int posX, int posY) {
-        int j = 0;
-        if (udlr == 4 || udlr == 1) {
-            j = 1;
-        }
-        if (udlr == 3 || udlr == 2) {
-            j = -1;
-        }
-        if (udlr == 3 || udlr == 4) {
-            if (posX + j <= this.wrldSize && posX + j >= 1) {
-                return true;
+                return 2;
             }
         }
-        if (udlr == 1 || udlr == 2) {
-            if (posY + j <= this.wrldSize && posY + j >= 1) {
-                return true;
-            }
+        if (enmy.getDefProb() >= rndm.nextInt(100) + 1) {
+            plr.parry();
+            return 3;
         }
-        return false;
-    }
-
-    public ArrayList<Enemy> enmies() {
-        Enemy enmy = new Enemy("Enemy", 1, 1, 2, 2, 5, 2.0, 2);
-        ArrayList<Enemy> enmies = new ArrayList();
-        enmies.add(enmy);
-        return enmies;
-    }
-
-    public Enemy checkForMonsters(int posX, int posY) {
-        Enemy mnstr = null;
-        for (Enemy enmy : enmies()) {
-            if (enmy.getPosX() == posX && enmy.getPosY() == posY) {
-                mnstr = enmy;
-                break;
-            }
-        }
-        return mnstr;
+        return 4;
     }
 }

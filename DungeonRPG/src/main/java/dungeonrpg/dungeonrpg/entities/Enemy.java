@@ -25,4 +25,8 @@ public class Enemy extends Entity {
     public int getAttProb() {
         return this.attProb;
     }
+
+    public void throwOffEdge(int edge) {
+        this.posX = edge + 100;
+    }
 }
