@@ -41,10 +41,10 @@ public class LogicTest {
         //Enemy constructor (String name, int attackProb, int defProb, int posX, 
         //int posY, double health, double attack, int turnpoints)
         l = new Logic();
-        e = new Enemy("", 1, 0, 2, 2, 0, 2.0, 2);
-        e2 = new Enemy("", 0, 101, 2, 2, 100, 0, 2);
-        e3 = new Enemy("", 101, 0, 2, 2, 100, 2.0, 2);
-        e4 = new Enemy("", 0, 0, 2, 2, 100, 2.0, 2);
+        e = new Enemy("", 1, 0, 2, 2, 0, 2.0, 2, "");
+        e2 = new Enemy("", 0, 101, 2, 2, 100, 0, 2, "");
+        e3 = new Enemy("", 101, 0, 2, 2, 100, 2.0, 2, "");
+        e4 = new Enemy("", 0, 0, 2, 2, 100, 2.0, 2, "");
 
     }
 
@@ -65,5 +65,41 @@ public class LogicTest {
         assertEquals("Enemy takes dmg but doesn't die ret 5", 5, l.plrTurn(e4, "1"));
         assertEquals("Enemy gets parried returns 7", 7, l.plrTurn(e4, "2"));
         assertEquals("Enemy resists parry returns 3", 3, l.plrTurn(e3, "2"));
+    }
+
+    @Test
+    public void movementTest() {
+        for (int i = 0; i <= l.getWrld().getSize() + 2; i++) {
+            l.movement(1);
+        }
+        assertEquals("Can't move too far vertically.", false, l.movement(1));
+        for (int i = 0; i <= l.getWrld().getSize() + 2; i++) {
+            l.movement(3);
+        }
+        assertEquals("Can't move too far horizontally..", false, l.movement(3));
+    }
+
+    @Test
+    public void plrDefTest() {
+        assertEquals("Defence should succeed", true, l.plrDef(e2));
+        assertEquals("Defence should fail", false, l.plrDef(e3));
+    }
+
+    @Test
+    public void enmyActnTest() {
+        int a = l.enmyActn(e2);
+        if (a <= 2) {
+            assertEquals("", 2, a);
+        }
+        if (a > 2) {
+            assertEquals("", 3, a);
+        }
+        a = l.enmyActn(e3);
+        if (a <= 2) {
+            assertEquals("", 1, a);
+        }
+        if (a > 2) {
+            assertEquals("", 4, a);
+        }
     }
 }

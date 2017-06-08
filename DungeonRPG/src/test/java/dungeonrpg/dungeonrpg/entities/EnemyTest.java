@@ -17,42 +17,46 @@ import static org.junit.Assert.*;
  * @author Jonne
  */
 public class EnemyTest {
+
     Enemy e;
+
     public EnemyTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        e = new Enemy("e",1,2,1,2,3,3.5,4);
+        e = new Enemy("e", 1, 2, 1, 2, 3, 3.5, 4, "");
     }
-    
+
     @After
     public void tearDown() {
     }
+
     @Test
-    public void parryTest(){
-        assertEquals("Not parried at beginning",false,e.getParried());
+    public void parryTest() {
+        assertEquals("Not parried at beginning", false, e.getParried());
         e.parry();
-        assertEquals("After parry(), parryied=true",true,e.getParried());
+        assertEquals("After parry(), parryied=true", true, e.getParried());
         e.unParry();
-        assertEquals("Not parried after unParry()",false,e.getParried());
+        assertEquals("Not parried after unParry()", false, e.getParried());
     }
+
     @Test
-    public void scndParryTest(){
+    public void scndParryTest() {
         int turnPointsAtStart = e.getTurnpoints();
         e.parry();
-        assertEquals("One less turnpoints after parry",turnPointsAtStart - 1,e.getTurnpoints());
+        assertEquals("One less turnpoints after parry", turnPointsAtStart - 1, e.getTurnpoints());
         e.parry();
-        assertEquals("Two less turnpoints after second parry",turnPointsAtStart -2,e.getTurnpoints());
+        assertEquals("Two less turnpoints after second parry", turnPointsAtStart - 2, e.getTurnpoints());
         e.unParry();
-        assertEquals("After unParry() turnpoints restored",turnPointsAtStart,e.getTurnpoints());
+        assertEquals("After unParry() turnpoints restored", turnPointsAtStart, e.getTurnpoints());
     }
 }

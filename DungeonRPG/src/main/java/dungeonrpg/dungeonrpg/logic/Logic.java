@@ -4,6 +4,9 @@ import dungeonrpg.dungeonrpg.entities.Player;
 import dungeonrpg.dungeonrpg.entities.Enemy;
 import java.util.Random;
 
+/**
+ * Class for game logic methods.
+ */
 public class Logic {
 
     private GameWorld wrld;
@@ -11,7 +14,7 @@ public class Logic {
     private Random rndm;
 
     public Logic() {
-        this.wrld = new GameWorld(5);
+        this.wrld = new GameWorld(10);
         this.plr = new Player();
         this.rndm = new Random();
     }
@@ -24,6 +27,12 @@ public class Logic {
         return this.plr;
     }
 
+    /**
+     * Checks if movement is possible and then moves player.
+     *
+     * @param d direction. 1=up,2=down,3=left,4=right.
+     * @return returns true if possible move. False otherwise.
+     */
     public boolean movement(int d) {
 
         if (wrld.moveLegal(d, plr.getPosX(), plr.getPosY())) {
@@ -33,6 +42,14 @@ public class Logic {
         return false;
     }
 
+    /**
+     * One turn worth of actions for player in battle.
+     *
+     * @param enmy the enemy object that player is in battle with.
+     * @param actn chosen action. "1"=attack and "2"= defence.
+     * @return result of turn. 4 = enemy dies, 5 = enemy takes damage, 2 =
+     * attack fail, 7 = enemy is parried, 3 = defence fail
+     */
     public int plrTurn(Enemy enmy, String actn) {
         //4 = enemy dies, 5 = enemy takes dmg, 2 = attack fail, 7 = enemy is parried, 3 = defence fail
         if (actn.equals("1")) {
@@ -52,6 +69,13 @@ public class Logic {
         return 3;
     }
 
+    /**
+     * Tests if attack succeeds. If it does then enemy looses player's attack
+     * worth of health.
+     *
+     * @param enmy opponent.
+     * @return true if attack successful. False otherwise.
+     */
     public boolean plrAtt(Enemy enmy) {
         if (enmy.getDefProb() <= rndm.nextInt(100) + 1) {
             enmy.takeDmg(plr.getAttack());
