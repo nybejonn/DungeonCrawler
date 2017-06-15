@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 public class PlayerTest {
 
     Player plr;
+    Loot l;
 
     public PlayerTest() {
 
@@ -35,6 +36,7 @@ public class PlayerTest {
     @Before
     public void setUp() {
         plr = new Player();
+        l = new Loot("l", 1, 1, 1, 1, 1, "!");
     }
 
     @After
@@ -87,5 +89,25 @@ public class PlayerTest {
         plr.equip(l1, l2);
         assertEquals("should be item1=a, item2=b", "a", plr.getItem1().getName());
         assertEquals("should be item1=a, item2=b", "b", plr.getItem2().getName());
+    }
+
+    @Test
+    public void itemTest() {
+
+        assertEquals("No change in attributes when no items equipped", plr.getItem1().getAttack() + plr.getAttack(), plr.getAttack(), 0.001);
+        assertEquals("No change in attributes when no items equipped", plr.getItem1().getHealth() + plr.getHealth(), plr.getHealth(), 0.001);
+        assertEquals("No change in attributes when no items equipped", plr.getItem1().getTurnpoints() + plr.getTurnpoints(), plr.getTurnpoints());
+
+    }
+
+    @Test
+    public void itemTest2() {
+        double h = plr.getHealth();
+        double a = plr.getAttack();
+        int t = plr.getTurnpoints();
+        plr.equip(l, null);
+        assertEquals("Items change attributes", h + l.getHealth(), plr.getHealth(), 0.001);
+        assertEquals("Items change attributes", a + l.getAttack(), plr.getAttack(), 0.001);
+        assertEquals("Items change attributes", t + l.getTurnpoints(), plr.getTurnpoints());
     }
 }

@@ -7,7 +7,7 @@ package dungeonrpg.dungeonrpg.entities;
  */
 public class Loot extends Entity {
 
-    private String name;
+    private final String name;
 
     public Loot(String name, int posX, int posY, int hlthBoost, double attackBoost, int turnPntsBoost, String sprite) {
         super(posX, posY, hlthBoost, attackBoost, turnPntsBoost, sprite);

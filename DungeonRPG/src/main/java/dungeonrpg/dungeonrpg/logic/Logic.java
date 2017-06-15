@@ -3,16 +3,18 @@ package dungeonrpg.dungeonrpg.logic;
 import dungeonrpg.dungeonrpg.entities.Player;
 import dungeonrpg.dungeonrpg.entities.Enemy;
 import java.util.Random;
-
 /**
  * Class for game logic methods.
+ *
  */
 public class Logic {
 
-    private GameWorld wrld;
-    private Player plr;
-    private Random rndm;
-
+    private final GameWorld wrld;
+    private final Player plr;
+    private final Random rndm;
+    /**
+     * Constructor.
+     */
     public Logic() {
         this.wrld = new GameWorld(10);
         this.plr = new Player();
@@ -48,10 +50,9 @@ public class Logic {
      * @param enmy the enemy object that player is in battle with.
      * @param actn chosen action. "1"=attack and "2"= defence.
      * @return result of turn. 4 = enemy dies, 5 = enemy takes damage, 2 =
-     * attack fail, 7 = enemy is parried, 3 = defence fail
+     * attack fails, 7 = enemy is parried, 3 = defence fail.
      */
     public int plrTurn(Enemy enmy, String actn) {
-        //4 = enemy dies, 5 = enemy takes dmg, 2 = attack fail, 7 = enemy is parried, 3 = defence fail
         if (actn.equals("1")) {
             if (plrAtt(enmy)) {
                 if (enmy.getHealth() == 0) {
@@ -83,7 +84,11 @@ public class Logic {
         }
         return false;
     }
-
+    /**
+     * Same as above but for defence.
+     * @param enmy
+     * @return 
+     */
     public boolean plrDef(Enemy enmy) {
         if (enmy.getAttProb() <= rndm.nextInt(100) + 1) {
             enmy.parry();
@@ -91,9 +96,12 @@ public class Logic {
         }
         return false;
     }
-
+    /**
+     * Method for enemy battle "AI".
+     * @param enmy Enemy in action.
+     * @return 1=enemy attacks successfully, 2 = enemy attack fails, 3 = enemy defends successfully, 4 = enemy defence fails
+     */
     public int enmyActn(Enemy enmy) {
-        //1=enemy attacks succesfully, 2 = enemy attack fails, 3 = enemy parries you, 4 = enemy def fail
         if (rndm.nextInt(10) <= 6) {
             if (enmy.getAttProb() >= rndm.nextInt(100) + 1) {
                 plr.takeDmg(enmy.getAttack());

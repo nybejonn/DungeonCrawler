@@ -1,6 +1,5 @@
 package dungeonrpg.dungeonrpg.entities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,10 +13,11 @@ public class Player extends Entity {
     private Loot item1;
     private Loot item2;
 
+    /**
+     * constructor for abstract class: (int posX,int posY,int health,double attack,int turnpoints,String sprite).
+     */
     public Player() {
-        //constructor for abstract class: (int posX,int posY,int health,double attack,int turnpoints)
         super(1, 1, 5.0, 2, 2, "@");
-
         this.exp = 0;
         this.parried = false;
         this.loot = new HashMap();
@@ -61,6 +61,11 @@ public class Player extends Entity {
         return this.loot;
     }
 
+    /**
+     * Method for moving player by changing coordinates accordingly.
+     *
+     * @param j direction for movement. 1=up, 2=down, 3=left,4=right
+     */
     public void move(int j) {
         if (j == 1) {
             this.posY++;
@@ -76,20 +81,37 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Check class enemy.
+     */
     public void parry() {
         this.parried = true;
         this.turnpoints--;
     }
 
+    /**
+     * Check class enemy.
+     */
     public void unParry() {
         this.parried = false;
         this.turnpoints = this.turnpointsSafe;
     }
 
+    /**
+     *
+     * @param loot found item to be added to inventory.
+     */
     public void addLoot(Loot loot) {
         this.loot.put(loot.getName().toLowerCase(), loot);
     }
 
+    /**
+     * Player can have two Loot class objects equipped. This method is for that
+     * purpose.
+     *
+     * @param itm1 Loot class object to be equipped.
+     * @param itm2 Loot class object to be equipped.
+     */
     public void equip(Loot itm1, Loot itm2) {
         if (itm1 != null) {
             item1 = itm1;

@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dungeonrpg.dungeonrpg.ui;
 
 import java.util.Set;
 
 /**
+ * Interface class for running tests on the Runner class.
  *
- * @author Jonne
  */
 public class TestUI implements Interface {
 
@@ -29,22 +24,26 @@ public class TestUI implements Interface {
 
     @Override
     public int whereTo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 1;
     }
 
     @Override
     public String battle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "1";
     }
 
     @Override
     public void alert(int k, String name, int turnpoints) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String[] inventory(Set<String> inv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] s = new String[2];
+        for (String l : inv) {
+            s[0] = l;
+            break;
+        }
+        return s;
     }
 
 }
