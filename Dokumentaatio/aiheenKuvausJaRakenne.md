@@ -11,7 +11,7 @@ Pelaaja.
 Liikkuminen ruudukossa lähinnä oleviin ruutuihin
 * Jos ruudussa, johon liikuttiin on esimerkiksi vihollinen tulee esiin valikko josta pelaaja valitsee mitä tehdään
 
-Mahdollista korottaa pelaajan attribuutteja esineiden ja/tai kokemuspisteiden avulla
+Mahdollista korottaa pelaajan attribuutteja esineiden avulla.
 
 **Sekvenssikaavioita:**
 
