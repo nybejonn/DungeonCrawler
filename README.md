@@ -14,3 +14,4 @@ Yksinkertainen vuoropohjainen luolastoroolipeli.
 
 [pit-raportti](https://htmlpreview.github.io/?https://github.com/nybejonn/DungeonCrawler/blob/master/Dokumentaatio/pit/201706281337/index.html)
 
+[JavaDoc](https://htmlpreview.github.io/?https://github.com/nybejonn/DungeonCrawler/blob/master/JavaDoc/index.html)
