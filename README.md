@@ -12,5 +12,5 @@ Yksinkertainen vuoropohjainen luolastoroolipeli.
 
 [checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/nybejonn/DungeonCrawler/blob/master/Dokumentaatio/checkstyle/checkstyle.html)
 
-[pit-raportti](https://htmlpreview.github.io/?https://github.com/nybejonn/DungeonCrawler/blob/master/Dokumentaatio/pit/201706081710/index.html)
+[pit-raportti](https://htmlpreview.github.io/?https://github.com/nybejonn/DungeonCrawler/blob/master/Dokumentaatio/pit/201706281337/index.html)
 
