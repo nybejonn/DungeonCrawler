@@ -3,10 +3,10 @@ package dungeonrpg.dungeonrpg.ui;
 import java.util.Set;
 
 /**
- * Interface class for running tests on the Runner class.
+ * GameIF class for running tests on the Runner class.
  *
  */
-public class TestUI implements Interface {
+public class TestUI implements GameIF {
 
     private Integer k;
 

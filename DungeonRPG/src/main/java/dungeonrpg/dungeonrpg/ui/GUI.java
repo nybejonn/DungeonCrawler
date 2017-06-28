@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,10 +25,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 /**
- * Graphical user interface class. Very swollen at the moment.
+ * Graphical user interface class.
  *
  */
-public class GUI extends JFrame implements Interface {
+public class GUI extends JFrame implements GameIF {
 
     private JPanel mainPanel;
     private JPopupMenu invMenu;
@@ -46,11 +48,13 @@ public class GUI extends JFrame implements Interface {
     private String lastActn;
     private String invChoice;
     private String invChoice2;
+    private boolean checkActn;
     private HashMap<String, Loot> loot;
     private final GameWorld gm;
 
     public GUI(int x, int y, GameWorld gm) {
         this.lastActn = "";
+        this.checkActn = false;
         this.gm = gm;
         this.lastMove = 0;
         this.x = x - 1;
@@ -207,12 +211,17 @@ public class GUI extends JFrame implements Interface {
         this.bttleButtons[0][0].setText("Attack");
         this.bttleButtons[0][0].addActionListener((ActionEvent e) -> {
             setLastActn("1");
+            this.checkActn = true;
         });
         this.bttleButtons[1][0].setText("Defend");
         this.bttleButtons[1][0].addActionListener((ActionEvent e) -> {
             setLastActn("2");
+            this.checkActn = true;
         });
         this.bttleButtons[2][0].setText("Escape");
+        this.bttleButtons[2][0].addActionListener((ActionEvent e) -> {
+            this.status.setText("Coward!");
+        });
     }
 
     public void change(String d) {
@@ -253,6 +262,10 @@ public class GUI extends JFrame implements Interface {
         this.gm.getEnmies().stream().forEach((e) -> {
             wrld[e.getPosY() - 1][e.getPosX() - 1].setText(e.getSprite());
         });
+        Loot rD = this.gm.getLoot().get("rubber duck");
+        wrld[rD.getPosY() - 1][rD.getPosX() - 1].setText(rD.getSprite());
+        Loot wS = this.gm.getLoot().get("wooden shield");
+        wrld[wS.getPosY() - 1][wS.getPosX() - 1].setText(wS.getSprite());
     }
 
     public void menuInventory(String name) {
@@ -260,6 +273,7 @@ public class GUI extends JFrame implements Interface {
         this.invButtons[loot.size() - 1][0].setText(name);
         this.invButtons[loot.size() - 1][0].addActionListener((ActionEvent e) -> {
             setInvChoice(name);
+            this.checkActn = true;
         });
     }
 
@@ -276,12 +290,16 @@ public class GUI extends JFrame implements Interface {
 
     @Override
     public String battle() {
+        this.checkActn = false;
         bttleMenu.show(mainPanel, 9, 100);
         synchronized (this) {
             try {
-                this.wait();
-            } catch (InterruptedException e) {
+                this.wait(4000);
+            } catch (InterruptedException ex) {
             }
+        }
+        if (!bttleMenu.isShowing() || this.checkActn == false) {
+            return battle();
         }
         return this.lastActn;
     }
@@ -351,21 +369,31 @@ public class GUI extends JFrame implements Interface {
         if (k == 16) {
             updateStatus("You have " + turnpoints + " turn points left.");
         }
-        waitForABit(1200);
-        updateStatus("Item 1: " + invChoice + " Item 2: " + invChoice2);
+        if (k != 16 && k != 14) {
+            waitForABit(1200);
+            updateStatus("Item 1: " + invChoice + " Item 2: " + invChoice2);
+        }
     }
 
     @Override
     public String[] inventory(Set<String> inv) {
+        this.checkActn = false;
 
         this.updateStatus("Choose an item for item slot 1");
         String[] s = new String[2];
-        synchronized (this) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
+
+        while (this.checkActn == false) {
+            synchronized (this) {
+                try {
+                    this.wait(1000);
+                } catch (InterruptedException e) {
+                }
+            }
+            if (!this.invMenu.isShowing()) {
+                invMenu.setVisible(true);
             }
         }
+        this.checkActn = false;
         s[0] = invChoice;
         if (loot.size() == 1) {
             this.invMenu.setVisible(false);
@@ -374,10 +402,15 @@ public class GUI extends JFrame implements Interface {
             return s;
         }
         this.updateStatus("Choose an item for item slot 2");
-        synchronized (this) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
+        while (this.checkActn == false) {
+            synchronized (this) {
+                try {
+                    this.wait(1000);
+                } catch (InterruptedException e) {
+                }
+            }
+            if (!this.invMenu.isShowing()) {
+                invMenu.setVisible(true);
             }
         }
         s[1] = invChoice;

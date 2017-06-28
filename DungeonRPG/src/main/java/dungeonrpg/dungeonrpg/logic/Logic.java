@@ -3,6 +3,7 @@ package dungeonrpg.dungeonrpg.logic;
 import dungeonrpg.dungeonrpg.entities.Player;
 import dungeonrpg.dungeonrpg.entities.Enemy;
 import java.util.Random;
+
 /**
  * Class for game logic methods.
  *
@@ -12,6 +13,7 @@ public class Logic {
     private final GameWorld wrld;
     private final Player plr;
     private final Random rndm;
+
     /**
      * Constructor.
      */
@@ -84,10 +86,12 @@ public class Logic {
         }
         return false;
     }
+
     /**
      * Same as above but for defence.
+     *
      * @param enmy
-     * @return 
+     * @return
      */
     public boolean plrDef(Enemy enmy) {
         if (enmy.getAttProb() <= rndm.nextInt(100) + 1) {
@@ -96,10 +100,13 @@ public class Logic {
         }
         return false;
     }
+
     /**
      * Method for enemy battle "AI".
+     *
      * @param enmy Enemy in action.
-     * @return 1=enemy attacks successfully, 2 = enemy attack fails, 3 = enemy defends successfully, 4 = enemy defence fails
+     * @return 1=enemy attacks successfully, 2 = enemy attack fails, 3 = enemy
+     * defends successfully, 4 = enemy defence fails
      */
     public int enmyActn(Enemy enmy) {
         if (rndm.nextInt(10) <= 6) {

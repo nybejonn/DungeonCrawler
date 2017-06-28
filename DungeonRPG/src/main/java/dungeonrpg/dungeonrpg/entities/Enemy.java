@@ -10,8 +10,10 @@ public class Enemy extends Entity {
     private final int defProb;
     private final int attProb;
     private boolean parried;
+
     /**
      * Constructor.
+     *
      * @param name
      * @param attackProb
      * @param defProb
@@ -20,7 +22,7 @@ public class Enemy extends Entity {
      * @param health
      * @param attack
      * @param turnpoints
-     * @param sprite 
+     * @param sprite
      */
     public Enemy(String name, int attackProb, int defProb, int posX, int posY, double health, double attack, int turnpoints, String sprite) {
         //attackProb ja defProb in range [1,100]
@@ -46,6 +48,7 @@ public class Enemy extends Entity {
     public int getAttProb() {
         return this.attProb;
     }
+
     /**
      * Method that puts enemy in state of parry. Lose one turn-point
      */
@@ -53,6 +56,7 @@ public class Enemy extends Entity {
         this.parried = true;
         this.turnpoints--;
     }
+
     /**
      * Method for un-parrying after one turn.
      */

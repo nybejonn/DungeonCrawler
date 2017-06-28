@@ -46,8 +46,10 @@ public abstract class Entity {
     public int getTurnpoints() {
         return this.turnpoints;
     }
+
     /**
      * Method for taking damage.
+     *
      * @param dmg amount of damage to be taken
      * @return amount of health left after attack
      */
@@ -55,8 +57,10 @@ public abstract class Entity {
         this.health = Math.max(this.health - dmg, 0);
         return this.health;
     }
+
     /**
      * Changes x-coordinate to such that player can't reach the entity anymore.
+     *
      * @param edge size of the game world.
      */
     public void throwOffEdge(int edge) {

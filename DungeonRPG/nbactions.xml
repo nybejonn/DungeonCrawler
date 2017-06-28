@@ -8,11 +8,18 @@
         </goals>
     </action>
     <action>
-    <actionName>CUSTOM-checkstyle</actionName>
-    <displayName>Checkstyle</displayName>
-    <goals>
-      <goal>jxr:jxr</goal>
-      <goal>checkstyle:checkstyle</goal>
-    </goals>
-  </action>
+        <actionName>CUSTOM-checkstyle</actionName>
+        <displayName>Checkstyle</displayName>
+        <goals>
+            <goal>jxr:jxr</goal>
+            <goal>checkstyle:checkstyle</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-Javadoc</actionName>
+        <displayName>Javadoc</displayName>
+        <goals>
+            <goal>javadoc:javadoc</goal>
+        </goals>
+    </action>
 </actions>

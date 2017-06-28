@@ -4,7 +4,12 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class TextUi implements Interface {
+/**
+ * Text based user interface.
+ *
+ * @author Jonne
+ */
+public class TextUi implements GameIF {
 
     private Scanner input;
 

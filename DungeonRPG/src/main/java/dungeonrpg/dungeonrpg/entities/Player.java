@@ -14,7 +14,8 @@ public class Player extends Entity {
     private Loot item2;
 
     /**
-     * constructor for abstract class: (int posX,int posY,int health,double attack,int turnpoints,String sprite).
+     * constructor for abstract class: (int posX,int posY,int health,double
+     * attack,int turnpoints,String sprite).
      */
     public Player() {
         super(1, 1, 5.0, 2, 2, "@");
@@ -34,6 +35,12 @@ public class Player extends Entity {
         return item2;
     }
 
+    /**
+     * Getters for health, attack and turn-points attributes are returned with
+     * possible changes made by items the player has equipped.
+     *
+     * @return
+     */
     @Override
     public double getHealth() {
         return this.health + item1.health + item2.health;
@@ -64,7 +71,7 @@ public class Player extends Entity {
     /**
      * Method for moving player by changing coordinates accordingly.
      *
-     * @param j direction for movement. 1=up, 2=down, 3=left,4=right
+     * @param j direction of movement. 1=up, 2=down, 3=left,4=right.
      */
     public void move(int j) {
         if (j == 1) {

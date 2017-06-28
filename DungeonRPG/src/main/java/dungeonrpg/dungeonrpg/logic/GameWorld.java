@@ -15,9 +15,11 @@ public class GameWorld {
     private final ArrayList<Enemy> enmies;
     private final HashMap<String, Loot> loot;
     private final Random rndm;
+
     /**
      * Constructor.
-     * @param size size of the world.
+     *
+     * @param size size of the 2d world.
      */
     public GameWorld(int size) {
         this.rndm = new Random();
@@ -35,8 +37,10 @@ public class GameWorld {
     public HashMap<String, Loot> getLoot() {
         return loot;
     }
+
     /**
      * Method checks if movement in user's indicated direction is allowed.
+     *
      * @param udlr the direction 1=up,2=down,3=left,4=right.
      * @param posX current x-coordinate.
      * @param posY current y-coordinate.
@@ -67,8 +71,10 @@ public class GameWorld {
 
         return this.enmies;
     }
+
     /**
      * Method for checking current position for enemies.
+     *
      * @param posX current x-coordinate.
      * @param posY current y-coordinate.
      * @return class Enemy object if there is one
@@ -83,8 +89,10 @@ public class GameWorld {
         }
         return mnstr;
     }
+
     /**
      * Same as checkForMonsters but for Loot objects.
+     *
      * @param posX current x-coordinate.
      * @param posY current y-coordinate.
      * @return class Loot object if there is one
@@ -99,16 +107,19 @@ public class GameWorld {
         }
         return luut;
     }
+
     /**
      * Throws enemy out of world from position (posX,posY).
+     *
      * @param posX
-     * @param posY 
+     * @param posY
      */
     public void killEnmy(int posX, int posY) {
         this.enmies.stream().filter((enmy) -> (enmy.getPosX() == posX && enmy.getPosY() == posY)).forEach((enmy) -> {
             enmy.throwOffEdge(size);
         });
     }
+
     /**
      * Creates enemies.
      */
@@ -116,10 +127,10 @@ public class GameWorld {
         //Enemy constructor: (String name, int attackProb, int defProb, int posX,
         //int posY, double health, double attack, int turnpoints, String sprite)
 
-        Enemy bert = new Enemy("Zombie Bertrand Russell", 60, 30, size, size, 10, 10, 3, "B");
+        Enemy bert = new Enemy("Zombie Bertrand Russell", 60, 30, size, size, 10, 4, 3, "B");
         this.enmies.add(bert);
 
-        Enemy t1 = new Enemy("Tree Person", 40, 20, 5, 5, 3, 2.0, 2, "£");
+        Enemy t1 = new Enemy("Tree Person", 40, 20, 5, 5, 4, 2.0, 2, "£");
         this.enmies.add(t1);
 
         Enemy t2 = new Enemy("Tree Person", 40, 20, 1, 10, 3, 2.0, 2, "£");
@@ -128,23 +139,28 @@ public class GameWorld {
         Enemy g1 = new Enemy("Ultra-Dimensional Gabbage", 50, 10, 2, 6, 4, 4, 1, "S");
         this.enmies.add(g1);
 
+        Enemy g2 = new Enemy("Ultra-Dimensional Gabbage", 50, 10, 7, 1, 4, 4, 1, "S");
+        this.enmies.add(g2);
+
         Enemy enmy3 = new Enemy("Man Bat", 20, 60, 9, 4, 3, 4, 1, "¤");
         this.enmies.add(enmy3);
 
     }
+
     /**
      * Creates Loot objects for the game.
      */
     private void scatterLoot() {
 
         Loot lngSwrd = new Loot("Longsword", 5, 5, 0, 2, 1, "!");
-        Loot woodShield = new Loot("Wooden Shield", 1, 10, 3, 0, 0, "!");
+        Loot woodShield = new Loot("Wooden Shield", 6, 7, 3, 0, 0, "!");
         Loot bttleX = new Loot("Battle Axe", 1, 10, 1, 5, 2, "!");
         Loot ironShld = new Loot("Iron Shield", 2, 6, 10, 0, 2, "!");
+        Loot rD = new Loot("Rubber Duck", 8, 7, 0, 0, 0, "!");
         loot.put(bttleX.getName().toLowerCase(), bttleX);
         loot.put(ironShld.getName().toLowerCase(), ironShld);
         loot.put(lngSwrd.getName().toLowerCase(), lngSwrd);
         loot.put(woodShield.getName().toLowerCase(), woodShield);
-
+        loot.put(rD.getName().toLowerCase(), rD);
     }
 }

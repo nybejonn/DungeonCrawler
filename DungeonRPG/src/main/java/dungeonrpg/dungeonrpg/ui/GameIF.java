@@ -2,7 +2,12 @@ package dungeonrpg.dungeonrpg.ui;
 
 import java.util.Set;
 
-public interface Interface {
+/**
+ * Interface for game ui's.
+ *
+ * @author Jonne
+ */
+public interface GameIF {
 
     boolean strt();
 

@@ -2,7 +2,7 @@ package dungeonrpg.dungeonrpg.logic;
 
 import dungeonrpg.dungeonrpg.entities.Enemy;
 import dungeonrpg.dungeonrpg.entities.Loot;
-import dungeonrpg.dungeonrpg.ui.Interface;
+import dungeonrpg.dungeonrpg.ui.GameIF;
 import java.util.HashMap;
 
 /**
@@ -11,9 +11,9 @@ import java.util.HashMap;
 public class Runner {
 
     private Logic l;
-    private Interface ui;
+    private GameIF ui;
 
-    public Runner(Interface ui, Logic l) {
+    public Runner(GameIF ui, Logic l) {
         this.l = l;
         this.ui = ui;
     }
@@ -21,8 +21,10 @@ public class Runner {
     public Logic getLogic() {
         return l;
     }
+
     /**
      * Method that runs the game methods in order.
+     *
      * @return boolean for testing purposes
      */
     public boolean runGame() {
@@ -39,8 +41,10 @@ public class Runner {
         }
         return ko;
     }
+
     /**
      * Method that runs the battle portion of gameplay.
+     *
      * @param enmy opponent
      * @return true if player dies, false otherwise
      */
@@ -71,8 +75,10 @@ public class Runner {
         }
         return false;
     }
+
     /**
      * Adds Loot objects to inventory if there are any in current position.
+     *
      * @param loot item to be added
      */
     public void loot(Loot loot) {
@@ -82,9 +88,11 @@ public class Runner {
             ui.alert(14, loot.getName(), 0);
         }
     }
+
     /**
      * Movement portion of gameplay.
-     * @param d option that the user has chosen. 1,2,3,4 for movement, 
+     *
+     * @param d option that the user has chosen. 1,2,3,4 for movement,
      * 5=inventory, 6=quit.
      * @return true if d=6, false otherwise.
      */
@@ -104,8 +112,10 @@ public class Runner {
         }
         return false;
     }
+
     /**
      * Method for choosing Loot objects from inventory.
+     *
      * @param loot HashMap of items in player's inventory.
      */
     public void inventoryCheck(HashMap<String, Loot> loot) {
@@ -118,8 +128,10 @@ public class Runner {
             l.getPlr().equip(loot.get(i1), loot.get(i2));
         }
     }
+
     /**
      * Method for enemy's "AI".
+     *
      * @param enmy
      * @return true if player dies and false otherwise.
      */
