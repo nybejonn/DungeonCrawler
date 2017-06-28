@@ -1,0 +1,3 @@
+**Käyttöohjeet**
+
+Peliä pelataan valitsemalla haluttu toiminto hiirellä klikkaamalla. Pelin voi lopettaa milloin vain Quit nappulasta.
